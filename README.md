@@ -40,3 +40,20 @@ where $\huge\sigma$ represents cross sections, $\huge\Delta\sigma$ represents th
 - By minimizing the $\Large\chi^2$ function with respect to the parameters within the CFFs, we obtain refined parameterizations constrained by experimental measurements.
 
 - Since the parameters of the real part of the CFF consist of those from its imaginary part together with a dispersion term, we therefore perform the extraction of the dispersion term.
+
+## Local fitting
+
+As an intermediate step we can perform the extraction of Imaginary and Real parts of CFF $\largeℋ$ for each $\large(\xi, -t)$ bin:
+
+|-t bin value| original plot | overlayed plot |
+|----|----|----|
+|-t=0.11| <img width="100" alt="Screenshot 2025-08-11 at 11 41 05 AM" src="https://github.com/user-attachments/assets/01b449b9-1efc-4c81-8d0c-c71722ec985f" /> | <img width="100" alt="Screenshot 2025-08-11 at 11 41 12 AM" src="https://github.com/user-attachments/assets/313311bb-3d8b-464c-8cda-6d8efb3c04c5" /> |
+|-t=0.15| <img width="100" alt="Screenshot 2025-08-11 at 11 40 41 AM" src="https://github.com/user-attachments/assets/84095c11-33bd-433b-894a-4b1d75d35e66" /> | <img width="100" alt="Screenshot 2025-08-11 at 11 40 50 AM" src="https://github.com/user-attachments/assets/1d5ad212-7d9f-4cc8-8452-e07d9e4da341" /> |
+|-t=0.20| <img width="100" alt="Screenshot 2025-08-11 at 11 41 19 AM" src="https://github.com/user-attachments/assets/b9ca6e6a-1b6b-4a47-9b11-0609dfc69e9b" /> | <img width="100" alt="Screenshot 2025-08-11 at 11 41 25 AM" src="https://github.com/user-attachments/assets/83688bd6-085c-4e46-a441-901a11d34f44" /> |
+|-t=0.26| <img width="100" alt="Screenshot 2025-08-11 at 11 41 33 AM" src="https://github.com/user-attachments/assets/71802248-8066-46ea-aeb6-9ab2da4c234d" /> | <img width="100" alt="Screenshot 2025-08-11 at 11 41 39 AM" src="https://github.com/user-attachments/assets/b12d1fcb-2fc4-4ddf-98c3-d65ee8ebd1b9" /> |
+|-t=0.34| <img width="100" alt="Screenshot 2025-08-11 at 11 41 47 AM" src="https://github.com/user-attachments/assets/c2174b63-d930-42c6-b3a6-ab60a961c0c8" /> | <img width="100" alt="Screenshot 2025-08-11 at 11 41 53 AM" src="https://github.com/user-attachments/assets/92f3549e-04aa-46a4-820d-ebad6f32223d" /> |
+
+
+
+
+
