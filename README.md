@@ -7,12 +7,16 @@
 
 |-t bin value|Number of cross section points|Number of asymmetry points|Plot|
 |----|----|----|----|
-|-t=0.11| 219 | 219 | <img width="100" alt="all-xsss-0" src="https://github.com/user-attachments/assets/58818b54-feb8-414e-9413-78f6c44d5eb4" /> |
-|-t=0.15| 250 | 250 | <img width="100" alt="all-xsss-1" src="https://github.com/user-attachments/assets/c5251225-1ca7-432d-94a3-895831594764" /> |
-|-t=0.20| 353 | 353 | <img width="100" alt="all-xsss-2" src="https://github.com/user-attachments/assets/1db5df86-6f80-4026-a9ab-6b410b4c8719" /> |
-|-t=0.26| 381 | 381 | <img width="100" alt="all-xsss-3" src="https://github.com/user-attachments/assets/f85982eb-ad84-4418-ba71-0da9527659bc" /> |
-|-t=0.34| 373 | 373 | <img width="100" alt="all-xsss-4" src="https://github.com/user-attachments/assets/e52252df-133a-4775-b43d-bae5f84b9057" /> |
-|-t=0.45| 357 | 357 | <img width="100" alt="all-xsss-5" src="https://github.com/user-attachments/assets/762fe3bf-02b6-4bf2-ad43-c2e342b938af" /> |
+|-t=0.11| 219 | 219 | <img width="100" src="https://github.com/user-attachments/assets/9b425954-a1a4-42d9-9ad7-0e5defe3da22" /> |
+|-t=0.15| 250 | 250 | <img width="100" src="https://github.com/user-attachments/assets/9aae2a84-eb6e-4438-9c14-4a7e600c401c" /> |
+|-t=0.20| 353 | 353 | <img width="100" src="https://github.com/user-attachments/assets/60469eff-b70f-4de9-bb76-e9ff4bd3377c" /> |
+|-t=0.26| 381 | 381 | <img width="100" src="https://github.com/user-attachments/assets/d680ca54-3e27-4881-9244-11fe488660dc" /> |
+|-t=0.34| 373 | 373 | <img width="100" src="https://github.com/user-attachments/assets/44d08b63-4c71-4378-88c1-8d98fa7a04fa" /> |
+|-t=0.45| 357 | 357 | <img width="100" src="https://github.com/user-attachments/assets/daf805a2-22d5-4ed3-92e0-1bc2885edb06" /> |
+
+
+
+
 ## Theoretical structure: GPDs &rarr; CFFs &rarr; Observables
 
 Ideally, theoretical models predict DVCS observables by first parameterizing the Generalized Parton Distributions (GPDs) using a double distribution ansatz, computing the corresponding Compton Form Factors (CFFs) through convolution integrals, and then using these CFFs to predict the experimental quantities. In practice, however, performing a fully constrained parameterization of all GPDs is highly challenging due to limited data coverage and complex theoretical constraints. As an intermediate step, we can instead model directly the CFFs for valence quarks.
