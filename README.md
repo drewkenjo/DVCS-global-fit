@@ -57,7 +57,12 @@ As an intermediate step we can perform the extraction of Imaginary and Real part
 |-t=0.26| <img width="100" alt="Screenshot 2025-08-11 at 11 41 33 AM" src="https://github.com/user-attachments/assets/71802248-8066-46ea-aeb6-9ab2da4c234d" /> | <img width="100" alt="Screenshot 2025-08-11 at 11 41 39 AM" src="https://github.com/user-attachments/assets/b12d1fcb-2fc4-4ddf-98c3-d65ee8ebd1b9" /> |
 |-t=0.34| <img width="100" alt="Screenshot 2025-08-11 at 11 41 47 AM" src="https://github.com/user-attachments/assets/c2174b63-d930-42c6-b3a6-ab60a961c0c8" /> | <img width="100" alt="Screenshot 2025-08-11 at 11 41 53 AM" src="https://github.com/user-attachments/assets/92f3549e-04aa-46a4-820d-ebad6f32223d" /> |
 
+### Extraction of local dispersion term for each individual -t bin
 
+- plot from original analysis
+<img width="640" src="https://github.com/user-attachments/assets/06427b11-71f2-40ed-b45f-5032e51882e8" />
 
+- preliminary extraction of dispersion term (need to check scaling/normalization factors)
+<img width="640" src="https://github.com/user-attachments/assets/2fb4d3e3-9878-420b-9797-717f134eb6d1" />
 
 
