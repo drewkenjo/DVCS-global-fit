@@ -60,9 +60,10 @@ As an intermediate step we can perform the extraction of Imaginary and Real part
 ### Extraction of local dispersion term for each individual -t bin
 
 - plot from original analysis
-<img width="480" src="https://github.com/user-attachments/assets/06427b11-71f2-40ed-b45f-5032e51882e8" />
+
 
 - preliminary extraction of dispersion term (need to check scaling/normalization factors)
+<img width="480" src="https://github.com/user-attachments/assets/06427b11-71f2-40ed-b45f-5032e51882e8" />
 <img width="480" src="https://github.com/user-attachments/assets/2fb4d3e3-9878-420b-9797-717f134eb6d1" />
 
 
