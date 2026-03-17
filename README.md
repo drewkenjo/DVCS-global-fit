@@ -16,6 +16,3 @@ g++ -shared -fPIC -o _DVCS_xsec.so DVCS_xsec_wrap.cxx DVCS_xsec.C `root-config -
 - 3D table of data points, ImH as a function of $(\xi,t)$, same for ReH
 	- t-dep dipole function with $m^2$
 	- fit surface
-- Follow-up questions:
-	- PARTONS paper that SACLAY did, ask Volker to send paper
-	- ask for list of experiments to get data from
