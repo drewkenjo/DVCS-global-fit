@@ -1,105 +1,40 @@
+#include<DVCS_xsec.h>
+#include<TF1.h>
+
+
+using namespace std;
 
 double PI = TMath::Pi();
-
-double alpha = 1./137.036;
 double alpha3 = TMath::Power(alpha,3.);
+double alpha = 1./137.036;
 double hbarc2 = 0.38938;//GeV^{2} mbarn
 
 double m = 0.000511;
 double M = 0.93827;
 double muP = 2.79285;
 
-double GetF1(double T);
-double GetF2(double T);
-double GetGMP(double tau);
-double GetGEP(double tau);
+bool hasH = true;
+bool hasHt = true;
+bool hasE = true;
+bool hasEt = true;
 
-double GetImH(double xi, double t);
-double GetImHt(double xi, double t);
-double GetImE(double xi, double t);
-double GetImEt(double xi, double t);
+void set_hasH(bool _has=true) {
+    hasH = _has;
+}
+void set_hasHt(bool _has=true) {
+    hasHt = _has;
+}
+void set_hasE(bool _has=true) {
+    hasE = _has;
+}
+void set_hasEt(bool _has=true) {
+    hasEt = _has;
+}
 
-double GetReH(double xi, double t);
-double GetReHt(double xi, double t);
-double GetReE(double xi, double t);
-double GetReEt(double xi, double t);
-
-bool hasH = false;
-bool hasHt = false;
-bool hasE = false;
-bool hasEt = false;
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-class BMK_DVCS{
-	public:
-		double q_beam, L_beam, L_target;
-		double EB, xB, Q2, t, phi, theta_Tpol, phi_Tpol;//primary variables ; EB on fixed target ; Trento convention 
-
-		double xi, nu, y, eps, eps2, phi_BMK, t_min, K2, K, J, Ktild2, Ktilda;//secondary variables ;  phi_BMK = pi - phi_Trento
-		double Jacob;//Jacobian from (xB,y) to (xB,Q2)
-		double F1, F2, FF_comb1, FF_comb2, FF_comb3;
-		double ImH, ImHt, ImE, ImEt;
-		double ReH, ReHt, ReE, ReEt;
-
-		bool VERB;
-
-		BMK_DVCS(double rq_beam, double rL_beam, double rL_target, double rEB, double rxB, double rQ2, double rt, double rphi, double rtheta_Tpol=0, double rphi_Tpol=0);
-		void setSecondaryVars(void);
-		void setPrimaryVars(double rq_beam, double rL_beam, double rL_target, double rEB, double rxB, double rQ2, double rt, double rphi, double rtheta_Tpol=0, double rphi_Tpol=0);
-
-		double CrossSection(void);
-		double TPolCrossSection(void);
-		double BSA(void);
-		double pBSA(void);
-		double TLSA(void);
-		double TLLSA(void);
-		double TTSAx(void);
-		double TTSAy(void);
-		double TTSSAx(void);
-		double TTSSAy(void);
-		double BCA(void);
-		double BCSA(void);
-		double BC0SA(void);
-		
-		double BCLA(void);
-		double BCLLA(void);
-		double BCTxA(void);
-		double BCTyA(void);
-
-		double T2(void);
-		double BH2(void);
-		double DVCS2(void);
-		double BHDVCS(void);
-
-		double c0_BH(void);
-		double c1_BH(void);
-		double c2_BH(void);
-		double c0_BH_LP(void);
-		double c1_BH_LP(void);
-		double c0_BH_TP(void);
-		double c1_BH_TP(void);
-		double s1_BH_TP(void);
-		double BHP1(void);
-		double BHP2(void);
-
-		double c0_I(void);
-		double c1_I(void);
-		double s1_I(void);
-		double c0_I_LP(void);
-		double c1_I_LP(void);
-		double s1_I_LP(void);
-		double c0_I_TP(void);
-		double c1_I_TP(void);
-		double s1_I_TP(void);
-		
-		double c0_DVCS(void);
-		double c0_DVCS_LP(void);
-		double c0_DVCS_TP(void);
-};
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+double get_xi(double xB, double t, double Q2) {
+  double tt = -TMath::Abs(t);
+	return xB * (1 + 0.5*tt/Q2) / ( 2-xB + xB*tt/Q2 );
+}
 
 BMK_DVCS::BMK_DVCS(double rq_beam, double rL_beam, double rL_target, double rEB, double rxB, double rQ2, double rt, double rphi, double rtheta_Tpol, double rphi_Tpol){
 	this->q_beam=rq_beam;
@@ -115,6 +50,7 @@ BMK_DVCS::BMK_DVCS(double rq_beam, double rL_beam, double rL_target, double rEB,
 	VERB = false;
 	this->setSecondaryVars();
 }
+
 
 void BMK_DVCS::setPrimaryVars(double rq_beam, double rL_beam, double rL_target, double rEB, double rxB, double rQ2, double rt, double rphi, double rtheta_Tpol, double rphi_Tpol){
 	this->q_beam=rq_beam;
@@ -155,12 +91,12 @@ void BMK_DVCS::setSecondaryVars(void){
 	FF_comb2 = TMath::Power(F1+F2,2);
 	FF_comb3 = F1 + t*F2/(4*M*M);
 
-	ImH  = GetImH(  xi , t);
+	ImH  = enableLocalImH ? localImH : GetImH(  xi , t, rvalImH, bvalImH, bseaImH);
 	ImHt = GetImHt( xi , t);
 	ImE  = GetImE(  xi , t);
 	ImEt = GetImEt( xi , t);
 
-	ReH  = GetReH(  xi , t);
+	ReH  = enableLocalReH ? localReH : GetReHviaDterm(  xi , t, rvalImH, bvalImH, dTerm, bseaImH);
 	ReHt = GetReHt( xi , t);
 	ReE  = GetReE(  xi , t);
 	ReEt = GetReEt( xi , t);
@@ -863,18 +799,27 @@ double GetGEP(double tau){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// original is 1
 double renormImag = 1;
 
 double GetImH(double xi, double t){
-	//return 0;
+  return GetImH(xi, t, 0.9, 0.4);
+}
+
+double GetImH(double xi, double t, double r, double b){
+  return GetImH(xi, t, r, b, 0.4);
+}
+
+double GetImH(double xi, double t, double r, double b, double bsea){
+	t = -fabs(t);
 	double res = 0;
 	if(hasH){
 		res=(1-xi)/t;
 		// VALENCE
-		double r = 0.9;
 		double alpha = 0.43 + 0.85*t;
+    //double r = 0.9;
+    //double b = 0.4;
 		double n = 1.35;
-		double b = 0.4;
 		double Mm2 = 0.64;
 		double P = 1;
 		res = TMath::Pi()*5.0/9.0 * n * r /(1+xi) * TMath::Power( 2*xi/(1+xi),-alpha ) * TMath::Power( (1-xi)/(1+xi) , b ) * TMath::Power( 1 - (1-xi)/(1+xi) *t/Mm2 , -P );
@@ -883,7 +828,7 @@ double GetImH(double xi, double t){
 			r = 1;
 			alpha = 1.13 + 0.15*t;
 			n = 1.5;
-			b = 0.4;
+			b = bsea;
 			Mm2 = 0.5;
 			P = 2;
 			res += TMath::Pi()*2.0/9.0 * n * r /(1+xi) * TMath::Power( 2*xi/(1+xi),-alpha ) * TMath::Power( (1-xi)/(1+xi) , b ) * TMath::Power( 1 - (1-xi)/(1+xi) *t/Mm2 , -P );
@@ -893,9 +838,28 @@ double GetImH(double xi, double t){
 	return res * renormImag;
 }
 
+double GetReHviaDterm(double xi, double t) {
+  return GetReHviaDterm(xi, t, 0.9, 0.4, 0);
+}
+
+double GetReHviaDterm(double xi, double t, double r, double b) {
+  return GetReHviaDterm(xi, t, r,b, 0, 0.4);
+}
+
+double GetReHviaDterm(double xi, double t, double r, double b, double d) {
+  return GetReHviaDterm(xi, t, r,b, d, 0.4);
+}
+
+double GetReHviaDterm(double xi, double t, double r, double b, double dTerm, double bsea) {
+  double eps = 0.001;
+  auto f1 = new TF1("f1",[](double *x, double *p){ return (1/(p[0]-x[0]) - 1/(p[0]+x[0]))*GetImH(x[0], p[1], p[2], p[3], p[4]); }, 0, 1, 5);
+  f1->SetParameters(xi, t, r, b, bsea);
+  return (f1->Integral(0, xi-eps) + f1->Integral(xi+eps, 1))/TMath::Pi() + dTerm;
+}
+
 double GetImHt(double xi, double t){
-	//return 0;
 	double res = 0;
+	t = -fabs(t);
 	if(hasHt){
 		res=0.1*(1-xi)/t;
 		double r = 7;
@@ -911,9 +875,9 @@ double GetImHt(double xi, double t){
 }
 
 double GetImE(double xi, double t){
-	//return 0;
 	// from HERMES CFF paper 1301.1230 argue ImE = 0.5 x ImH
 	double res = 0;
+	t = -fabs(t);
 	if(hasE){
 		res=1.5*(1-xi)/t;
 		// VALENCE
@@ -946,6 +910,7 @@ double renormReal = 1.0;//test Vadim comparison
 
 double GetReH(double xi, double t){
 	double res = 0;
+	t = -fabs(t);
 	if(hasH){
 		res  = -12*xi*TMath::Power(1-xi,2) *TMath::Sqrt(TMath::Abs(t))/TMath::Power(1-t/0.7,2);
 		res += -3*TMath::Power(1-xi,4) /TMath::Power(1-t/1.1,2);
@@ -956,12 +921,14 @@ double GetReH(double xi, double t){
 
 double GetReHt(double xi, double t){
 	double res = 0;
-	if(hasHt)res=-12*xi*TMath::Power(1-xi,2) /TMath::Power(1-t/1.5,2);
+	t = -fabs(t);
+	if(hasHt) res=-12*xi*TMath::Power(1-xi,2) /TMath::Power(1-t/1.5,2);
 	return res*renormReal;
 }
 
 double GetReE(double xi, double t){
 	double res = 0;
+	t = -fabs(t);
 	if(hasE){
 		res = -7 * xi*TMath::Power(1-xi,2) *TMath::Sqrt(TMath::Abs(t))/TMath::Power(1-t/0.7,2);
 		res += -3*TMath::Power(1-xi,2)/TMath::Power(1-t/1.2,2);
@@ -972,9 +939,9 @@ double GetReE(double xi, double t){
 }
 
 double GetReEt(double xi, double t){
-	//return 0;
 	double res = 0;
-	if(hasEt)res=10/t * 1/( 1 + TMath::Power( 3*xi , 4) );
+	t = -fabs(t);
+	if(hasEt) res=10/t * 1/( 1 + TMath::Power( 3*xi , 4) );
 	return res*renormReal;
 }
 
